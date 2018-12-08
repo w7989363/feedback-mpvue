@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/user/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#8C0000",
+    "navigationBarTitleText": "校园问题反馈平台",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#8C0000",
+    "enablePullDownRefresh": true
+  }
+}
