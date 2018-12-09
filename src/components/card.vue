@@ -98,8 +98,8 @@ export default {
         display: inline-block;
         content: '';
         border-bottom: 40rpx solid #ebebeb;
-        border-left: 30rpx solid transparent;
-        border-right: 30rpx solid transparent;
+        border-left: 25rpx solid transparent;
+        border-right: 25rpx solid transparent;
       }
       .red-triangle {
         border-bottom-color: #8C0000;

@@ -1,10 +1,10 @@
 <template>
   <div class="page">
     <div class="header">
-      <img class="header-icon" src="../../assets/images/search.png">
+      <img class="header-icon" src="../../assets/images/search.png" @click="goSearch()">
       <div :class="['tab', order === NEW ? 'selected-tab' : '']" @click="order = NEW">最 新</div>
       <div :class="['tab', order === HOT ? 'selected-tab' : '']" @click="order = HOT">最 热</div>
-      <img class="header-icon" src="../../assets/images/plus.png">
+      <img class="header-icon" src="../../assets/images/plus.png" @click="goAdd()">
     </div>
     <div class="content">
       <card v-for="item in order ? newOrder : hotOrder" :key="item.id" :feedback="item"></card>
@@ -83,8 +83,18 @@ export default {
       }
       
     },
-    changeTab(order) {
-      this.order = order
+    // changeTab(order) {
+    //   this.order = order
+    // },
+    goSearch() {
+      wx.navigateTo({
+        url: '../search/main'
+      })
+    },
+    goAdd() {
+      wx.navigateTo({
+        url: '../add/main'
+      })
     },
   },
 
@@ -94,32 +104,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.header {
-  height: 80rpx;
-  flex: 0 0 80rpx;
-  width: 100%;
-  background-color: #8C0000;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .header-icon {
-    width: 50rpx;
-    height: 50rpx;
-    padding: 0 10rpx;
-  }
-  .tab {
-    font-size: 16px;
-    width: 100rpx;
-    text-align: center;
-    color: #FFF;
-    font-weight: 400;
-    height: 65rpx;
-    line-height: 65rpx;
-  }
-  .selected-tab {
-    font-weight: 600;
-    border-bottom: 1px solid #FFF;
-  }
+.tab {
+  font-size: 16px;
+  width: 100rpx;
+  text-align: center;
+  color: #FFF;
+  font-weight: 400;
+  height: 65rpx;
+  line-height: 65rpx;
+}
+.selected-tab {
+  font-weight: 600;
+  border-bottom: 1px solid #FFF;
 }
 .content {
   width: 100%;
