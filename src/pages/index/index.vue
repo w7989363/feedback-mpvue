@@ -7,20 +7,22 @@
       <img class="header-icon" src="../../assets/images/plus.png">
     </div>
     <div class="content">
-      <Card v-for="item in order ? newFeedbackArray : hotFeedbackArray" :key="item.id" :problem="item"></Card>
+      <card v-for="item in order ? newOrder : hotOrder" :key="item.id" :feedback="item"></card>
     </div>
-    <!-- <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a> -->
   </div>
 </template>
 
 <script>
 import api from '@/service/api'
-import Card from '@/components/card'
-// import { mapGetters } from 'vuex'
+import card from '@/components/card'
+import { mapGetters, mapActions } from 'vuex'
 const NEW = 1
 const HOT = 0
 
 export default {
+  components: {
+    card
+  },
   data () {
     return {
       NEW,
@@ -40,15 +42,28 @@ export default {
     }
   },
   computed: {
-    // ...mapGetters([
-    //   'problemTags'
-    // ]),
+    ...mapGetters([
+      'feedbacks'
+    ]),
+    newOrder() {
+      let temp = [...this.feedbacks]
+      temp.sort((a, b) => a.time < b.time)
+      return temp
+    },
+    hotOrder() {
+      let temp = [...this.feedbacks]
+      temp.sort((a, b) => a.support < b.support)
+      return temp
+    }
   },
-  components: {
-    Card
+  created () {
+    // const res = 
+    this.getFeedback()
   },
-
   methods: {
+    ...mapActions([
+      'updateFeedbacks'
+    ]),
     async getFeedback() {
       const params = {
         order: this.order,
@@ -56,15 +71,15 @@ export default {
         // TODO: login
         userid: 1
       }
-      console.log(123);
       const res = await api.getFeedback(params)
       if (res.status == 1) {
-        this.order === NEW ? this.newFeedbackArray.push(...res.data) : this.hotFeedbackArray.push(...res.data)
+        // this.order === NEW ? this.newFeedbackArray.push(...res.data) : this.hotFeedbackArray.push(...res.data)
+        this.updateFeedbacks(res.data)
       } else {
         wx.showToast({
-        title: '请检查网络',
-        icon: 'none'
-      })
+          title: '获取信息失败，请检查网络',
+          icon: 'none'
+        })
       }
       
     },
@@ -73,10 +88,7 @@ export default {
     },
   },
 
-  created () {
-    // const res = 
-    this.getFeedback()
-  },
+  
   
 }
 </script>
@@ -113,5 +125,6 @@ export default {
   width: 100%;
   flex: 1 1;
   overflow-y: scroll;
+  padding: 20rpx 0;
 }
 </style>
