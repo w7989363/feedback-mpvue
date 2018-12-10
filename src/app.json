@@ -3,6 +3,7 @@
     "pages/index/main",
     "pages/detail/main",
     "pages/search/main",
+    "pages/add/main",
     "pages/user/main"
   ],
   "window": {

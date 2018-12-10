@@ -64,6 +64,7 @@ export default {
   },
   async onShow(){
     this.searchInput = ''
+    this.clearTags()
     // 没有tags则重新获取
     if (!this.tags.length) {
       console.log('fetch tags again');
@@ -81,6 +82,7 @@ export default {
   methods: {
     ...mapActions([
       'toggleTag',
+      'clearTags',
       'updateSearchResult'
     ]),
   },

@@ -25,6 +25,9 @@ const actions = {
   updateTags({ commit }, data) {
     commit(types.UPDATE_TAGS, data)
   },
+  clearTags({ commit }, data) {
+    commit(types.CLEAR_TAGS, data)
+  },
   updateFeedbacks({ commit }, data) {
     commit(types.UPDATE_FEEDBACKS, data)
   },
@@ -43,6 +46,11 @@ const actions = {
 const mutations = {
   [types.UPDATE_TAGS](state, data) {
     state.tags = data
+  },
+  [types.CLEAR_TAGS](state, data) {
+    state.tags.forEach(tag => {
+      tag.selected = false
+    })
   },
   [types.UPDATE_FEEDBACKS](state, data) {
     state.feedbacks = data
@@ -77,8 +85,6 @@ const mutations = {
     });
   },
   [types.TOGGLE_TAG](state, { id }) {
-    // state.feedbacks = data
-    console.log(id);
     state.tags.forEach(tag => {
       if (tag.id == id) {
         tag.selected = !tag.selected

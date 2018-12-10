@@ -15,6 +15,11 @@ api.getComments = (params) => get(`${baseUrl}/feedback/getComments`, params)
 api.addComment = (params) => post(`${baseUrl}/feedback/addComment`, params)
 // 搜索
 api.search = (params) => get(`${baseUrl}/search/search`, params)
-
+// 添加反馈
+api.addFeedback = (params) => post(`${baseUrl}/feedback/addFeedback`, params)
+// 上传图片
+api.uploadImg = (params) => post(`${baseUrl}/feedback/uploadimg`, params)
+// 删除反馈
+api.deleteFeedback = (params) => post(`${baseUrl}/feedback/deleteFeedback`, params)
 
 export default api
